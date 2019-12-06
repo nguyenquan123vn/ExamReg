@@ -1,19 +1,57 @@
-const pool = require('./db');
+/*const pool = require('./db');
+const session = require('express-session');
+const mysql_sess = require('express-mysql-session')(session);
+const bycrypt = require('bcrypt'); */
 
-var User = function(user){
-    this.id = user.id;
-    this.password = user.password;
-}
-
-User.login = function(id, password, res){
-    let sql = 'SELECT * FROM `account_list` WHERE `id` =' + id + ' AND `_password` = ' + password;
-    pool.query(sql, (error, result) => {
-        if (error) throw error; 
+/*function user_login(request, response) {
+    var username = request.body.username;
+    var password = request.body.password;
+    let sql = 'SELECT * FROM `account_list` WHERE `user_name` = ?';
+    pool.query(sql, [username], (err, result) => {
+        if(err) throw err;
         console.log(result);
-        res.status(200).json({
-            res:result
-        })
+        if(result[0].password == password)
+        {
+            request.session.login = true;
+            request.session.username = username;
+            response.status(200).json({
+                result : result
+            })
+        }
     })
-};
+}*/
 
-module.exports = User;
+const Sequelize = require('sequelize');
+const db = require('./db');
+const Model = Sequelize.Model;
+
+module.exports = db.sequelize.define('accountList', {
+    //attribute
+    id: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        primaryKey: true
+    },
+    username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    isAdmin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: 0
+    },
+    created: {
+        type: Sequelize.DATE
+    }
+}, {
+    timestamps: false,
+    freezeTableName: true
+})
+
+
+
