@@ -7,8 +7,6 @@ function Login() {
         <div>
             <div className={styles.App}>
                 <div>
-                    <p>ABC UNI</p>
-                    <p>Online Testing</p>
                     <h1>LOGIN</h1>
                 </div>
 

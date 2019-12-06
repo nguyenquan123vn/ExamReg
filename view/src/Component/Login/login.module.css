@@ -13,8 +13,11 @@ body {
   background: #27282d;
   background-image: url('/src/assest/images/background.jpeg');
   height:420px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  left: 100px;
+  left: 480px;
   width: 550px;
   margin: 0 auto;
   border-radius: 5px;
