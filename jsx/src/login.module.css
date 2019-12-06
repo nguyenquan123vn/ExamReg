@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis:300");
 body {
-  background-image: url('./images/background.jpeg');
   height: 100vh;
   overflow: hidden;
   display: flex;
@@ -23,13 +22,13 @@ body {
   align-items: center;
 }
 
-.input-container {
+.inputContainer {
   position: relative;
   margin-bottom: 150px;
   width: 340px;
   top: -20px;
 }
-.input-container-2{
+.inputContainer2{
   position: relative;
   margin-bottom: 150px;
   width: 340px;
