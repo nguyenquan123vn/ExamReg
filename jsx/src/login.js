@@ -3,7 +3,7 @@ import styles from './login.module.css'
 import Home from './home'
 // import Home from './home'
 // import { createHashHistory } from 'history'
-// import { Redirect, Link, Route, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
+ import { Redirect, Link, Route, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
 function Login() {
     return (
         <div className={styles.App}>
@@ -21,7 +21,9 @@ function Login() {
             <div className={styles.inputContainer2}>
                 <input type="password" placeholder="Password" />
                 <i className="z"></i>
-                <button>Sign In</button>
+                <Link to='/home'>
+                    <button type='button'>Login</button>
+                </Link>
             </div>
         </div>
     );
