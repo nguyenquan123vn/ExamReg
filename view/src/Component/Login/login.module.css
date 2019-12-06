@@ -1,14 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis:300");
 body {
+  background-image: url('/src/assest/images/background.jpeg');
   height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content:left;
   align-items: center;
+  background-color: #626571;
 }
 
 .App {
   background: #27282d;
+  background-image: url('/src/assest/images/background.jpeg');
   height:420px;
   position: relative;
   left: 100px;

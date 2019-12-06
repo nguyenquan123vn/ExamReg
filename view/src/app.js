@@ -1,8 +1,7 @@
 import React from 'react';
-import Login from './login.js'
-import Home from './home.js'
+import Login from './Component/Login/login'
+import Home from './Component/homeStudent/home'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
-import { watchFile } from 'fs';
 
 class App extends React.Component {
     render() {
