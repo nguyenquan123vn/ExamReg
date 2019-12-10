@@ -1,15 +1,16 @@
-/*const mysql = require('mysql');
+const mysql = require('mysql');
 
+//config db
 const config = {
     connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: 'slowpoke',
-    database: 'ExamReg'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DB
 };
+const pool = mysql.createPool(config); 
 
-const pool = mysql.createPool(config);
-
+//check connections
 pool.getConnection((err, connection) => {
     if (err) {
         console.log(err.code);
@@ -20,36 +21,6 @@ pool.getConnection((err, connection) => {
       connection.release()
       return
     }
-})
-module.exports = pool; */
+}) 
 
-
-const Sequelize = require('sequelize');
-
-const db = {};
-
-const sequelize = new Sequelize('ExamReg', 'root', 'slowpoke', {
-    host: 'localhost',
-    dialect: 'mysql',
-
-    pool: {
-        max: 10,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-})
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+module.exports = pool;

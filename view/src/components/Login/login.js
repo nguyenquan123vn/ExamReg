@@ -1,33 +1,30 @@
 import React from 'react'
-import styles from './login.css'
+import './login.css'
 import Home from '../studentManager/studentHome'
+import UserCircle from '@material-ui/icons/AccountCircle'
+import LockIcon from '@material-ui/icons/Lock';
 import { Redirect, Link, Route, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
+class Login extends React.Component {
+    render() {
+        return (
+            <div className="App">
 
-function Login() {
-    return (
-        <div>
-            <div className={styles.App}>
-                <div>
-                    <p>ABC UNI</p>
-                    <p>Online Testing</p>
-                    <h1>LOGIN</h1>
-                </div>
-
-                <div className={styles.inputContainer}>
+                <div className="input-container">
                     <input type="text" placeholder="Username" />
-                    <i className="z"></i>
+                    <UserCircle className='iconLogin' />
                 </div>
 
-                <div className={styles.inputContainer2}>
+                <div className="input-container">
                     <input type="password" placeholder="Password" />
-                    <i className="z"></i>
-                    <Link to='/home'>
-                        <button type='button' className=''>Login</button>
-                    </Link>
+                    <LockIcon className='iconLogin' />
                 </div>
+
+                <Link to='/home'>
+                    <button type='button'>Login</button>
+                </Link>
             </div>
-        </div>
-    );
+        )
+    }
 }
 
-export default Login;
+export default Login; 

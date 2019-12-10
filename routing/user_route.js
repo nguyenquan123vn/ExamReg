@@ -2,24 +2,23 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const readExcel = require('convert-excel-to-json');
+const multer = require('multer');
 
 const User = require('../model/userModel');
 
 const user_router = express.Router();
 user_router.use(cors());
 
-process.env.SECRET_KEY = 'secret'
-
-user_router.post('/register', (request, response) => {
+/*user_router.post('/register', (request, response) => {
     let today = new Date();
     let userData = {
         id: request.body.id,
         username: request.body.username,
         password: request.body.password,
-        isAdmin: request.body.isAdmin,
+        isAdmin: 0,
         created: today
     }
-
     User.findOne({
         where: {
             username: request.body.username
@@ -41,7 +40,7 @@ user_router.post('/register', (request, response) => {
             response.json({error: 'User existed'})
         }
     })
-});
+});  */
 
 user_router.post('/login', (request, response) => {
    User.findOne({
