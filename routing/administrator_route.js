@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const readExcel = require('read-excel-file/node');
 const multer = require('multer');
 const fs = require('fs');
@@ -20,47 +19,46 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage: storage});
 
+
 admin_router.post('/register', upload.single("File"), (request, response) => {
     console.log('req.file:' , request.file);
     let filepath = __dirname + '/upload/' + request.file.filename;
+    let today = Date.now();
     //read excel file
     readExcel(filepath).then((rows) => {
+        //remove header row
         rows.shift();
         console.log(rows);
         
-        for(let i = 0; i < rows.size; ++i){
-            let userData = {
-                id: rows[i][0],
-                username: rows[i][0],
-                password: rows[i][1],
-                isAdmin: 0,
-                created: today
-            }
-            User.findOne({
-                where: {
-                    username: rows[i][0]
-                }
-            }).then(user => {
-                if(!user) {
-                    bcrypt.hash(request.body.password, 10, (err, hash) => {
-                        userData.password = hash;
-                        User.create(userData).then(user => {
-                            response.json({status: 'Registered'})
-                        })
-                        .catch(err =>{
-                            response.send('error:' + err);
-                        })
-                    })
-                }
-                else 
-                {
-                    response.json({error: 'User existed'})
-                }
-            })
+        let user_name = rows.map(rows => rows[0]);
+        let password = rows.map(rows => rows[1]);
+        let userData = {
+            id: [user_name],
+            username: [user_name],
+            password: [password],
+            isAdmin: 0,
+            created: today
         }
+        User.findOne({
+            where: {
+                username: [user_name]
+            }
+        }).then(user => {
+            if(!user) {
+                bcrypt.hash([password], 10, (err, hash) => {
+                    userData.password = hash;
+                    User.create(userData).then(user => {
+                        response.json({status: 'Registered'})
+                    })
+                    .catch(err =>{
+                        response.send('error:' + err);
+                    })
+                })
+            }
+        })
     });
+    //delete upload file
     fs.unlinkSync(filepath);
-    //response.json({'msg': 'file upload ' + request.file.filename});
 })
 
 module.exports = admin_router;

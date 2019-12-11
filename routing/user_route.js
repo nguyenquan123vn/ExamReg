@@ -70,13 +70,9 @@ user_router.get('/logout', (request, response) => {
     
 })
 
-
-
-
 user_router.get('/user', function (req, res) {
     
 })
-
 
 /*router.get('*', function(req, res){
     res.send('Sorry, this is an invalid URL.');

@@ -1,26 +1,22 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
-module.exports = db.sequelize.define('exam', {
+module.exports = db.sequelize.define('class_subject', {
     //attribute
-    exam_id: {
-        type: Sequelize.INTEGER,
+    class_id: {
+        type: Sequelize.STRING,
         allowNull: false,
         primaryKey: true
     },
-    exam_name: {
+    subject_id: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    semester: {
+    name_of_lecturer: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    date_start: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    date_end: {
+    semester: {
         type: Sequelize.STRING,
         allowNull: false
     }

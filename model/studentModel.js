@@ -1,25 +1,30 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
-module.exports = db.sequelize.define('exam_room', {
+module.exports = db.sequelize.define('studentInfo', {
     //attribute
-    room_id: {
+    stud_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true
     },
-    room_name: {
+    stud_name: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    address: {
+    class_id: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    isAdmin: {
+    eligible: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: 0
+        allowNull: false
+    }, 
+    created: {
+        type: Sequelize.DATE
+    },
+    modified: {
+        type: Sequelize.DATE
     }
 }, {
     timestamps: false,

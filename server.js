@@ -10,6 +10,7 @@ const mysqlStore = require('express-mysql-session')(session); */
 
 const user_route = require('./routing/user_route');
 const admin_route = require('./routing/administrator_route');
+const student_route = require('./routing/student_route');
 const ORM = require('./model/ORM');
 const db = require('./model/db');
 
@@ -37,9 +38,10 @@ app.use(session({
 //Router
 app.use('/user',user_route);
 app.use('/administrator', admin_route);
+app.use('/student', student_route);
 
 // Start the server
-const server = app.listen(port, function () {
+const server = app.listen(port, () => {
    var host = server.address().address;   
    console.log(`Listening on port ${port}`)
 })
