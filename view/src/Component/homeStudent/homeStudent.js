@@ -25,7 +25,7 @@ const styles = {
 };
 function studentHome({ classes, history }) {
   function logout() {
-    history.push("/home")
+    history.push("/")
   }
   return (
     <div className={classes.root}>
