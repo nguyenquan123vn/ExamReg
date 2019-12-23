@@ -1,32 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Dosis:300");
-.homeLogin{
-    font-family: 'Dosis';
-
-    /* Give app full page to work with */
-    height: 100vh;
+body{
+    font-family: 'Roboto', sans-serif;
 }
-
 
 *{
     margin:0;
     padding: 0;
-}
-.button1{
-    background: #33343b;
-    position: relative;
-    top: 50px;
-    left: 60px;
-    border: none;
-    border-radius: 30px;
-    color: #ccced3;
-    font-size: 20px;
-    padding: 20px 80px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 20px;
-    margin-bottom: -30px;
-    transition: all 0.3s;
-}
-.headerHome{
-   font-size: 50px;
 }
