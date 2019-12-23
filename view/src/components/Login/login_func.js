@@ -2,7 +2,7 @@ import axios from 'axios';
 export const login = user => {
     return axios
       .post('user/login', {
-        email: user.email,
+        username: user.username,
         password: user.password
       })
       .then(response => {

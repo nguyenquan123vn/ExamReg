@@ -22,7 +22,8 @@ module.exports = db.sequelize.define('accountList', {
         defaultValue: 0
     },
     created: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
     }
 }, {
     timestamps: false,

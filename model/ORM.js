@@ -14,6 +14,7 @@ const sequelize = new Sequelize(process.env.DB_DB, process.env.DB_USER, process.
   }
 })
 
+//check db connection
 sequelize
   .authenticate()
   .then(() => {
@@ -26,5 +27,4 @@ sequelize
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-//module.exports = pool; 
 module.exports = db;

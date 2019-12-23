@@ -2,21 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const readExcel = require('convert-excel-to-json');
-const multer = require('multer');
 
 const User = require('../model/userModel');
 
 const user_router = express.Router();
 user_router.use(cors());
 
-/*user_router.post('/register', (request, response) => {
+user_router.post('/register', (request, response) => {
     let today = new Date();
     let userData = {
         id: request.body.id,
         username: request.body.username,
         password: request.body.password,
-        isAdmin: 0,
+        isAdmin: 1,
         created: today
     }
     User.findOne({
@@ -40,21 +38,28 @@ user_router.use(cors());
             response.json({error: 'User existed'})
         }
     })
-});  */
+});  
 
+//login function
 user_router.post('/login', (request, response) => {
    User.findOne({
+       attributes: {exclude: ['created', 'username']},
        where: {
            username: request.body.username
        }
-   }).then(user => {
+   }).then( (user,err) => {
        if(user) {
+           //compare hashed password with user input password
            if(bcrypt.compareSync(request.body.password, user.password)){
-               let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-                   algorithm : ES512,
+               //jwt implementation
+               let token = jwt.sign((user.dataValues), process.env.SECRET_KEY, {
+                   algorithm : 'HS384',
                    expiresIn : 1440
-               })
-               response.send(token);
+               }) 
+               response.send(token); 
+               console.log(user.dataValues);    
+           } else {
+               console.log(err);
            }
         }
         else 
@@ -62,6 +67,7 @@ user_router.post('/login', (request, response) => {
             response.status(400).json({error: 'User does not exist'})
         }
    }).catch(err => {
+       console.log(err);
        response.status(400).json({error: err});
    })
 }); 
