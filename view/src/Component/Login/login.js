@@ -1,5 +1,6 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -34,7 +35,6 @@ const styles = theme => ({
     margin: theme.spacing(3, 0, 2)
   }
 });
-
 class SignIn extends React.Component {
   state = {
     formData: {
@@ -49,6 +49,7 @@ class SignIn extends React.Component {
     this.setState({ formData });
   };
 
+  
   handleSubmit = () => {
     this.setState({ submitted: true }, () => {
       this.props.history.push("/home");
@@ -67,10 +68,10 @@ class SignIn extends React.Component {
           <CssBaseline />
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
+              <AccountCircleIcon style={{fill:"white"}} />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign in to ABCtest
             </Typography>
             <TextValidator
               variant="outlined"
@@ -78,8 +79,8 @@ class SignIn extends React.Component {
               required
               onChange={this.handleChange}
               value={formData.username}
-              validators={["required", "isEmail"]}
-              errorMessages={["this field is required", "email is not valid"]}
+              validators={["required", "minStringLength:8"]}
+              errorMessages={["không được bỏ trống mã số sinh viên", "mã số sinh viên phải  là 8 số"]}
               fullWidth
               id="username"
               label="Email"
@@ -97,8 +98,8 @@ class SignIn extends React.Component {
               value={formData.password}
               validators={["required", "minStringLength:6"]}
               errorMessages={[
-                "Password can't not empty",
-                "Must at least 6 character"
+                "không được để trống mật khẩu",
+                "Mật khẩu ít nhất 6 ký tự"
               ]}
               id="password"
             />
@@ -116,18 +117,6 @@ class SignIn extends React.Component {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </div>
           <Box mt={8} />
         </Container>
