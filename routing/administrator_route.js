@@ -50,9 +50,9 @@ admin_router.post('/register', upload.single("File"), (request, response) => {
                     bcrypt.hash(password[i], 10, (err, hash) => {
                         userData.password = hash;
                         User.create(userData).then(user => {
-                            console.log("success");
                             ++count;
-                            return;
+                            console.log("success");
+                            //return;
                         })
                         .catch(err =>{
                             console.log('error:' + err);

@@ -43,11 +43,11 @@ user_router.post('/register', (request, response) => {
 //login function
 user_router.post('/login', (request, response) => {
    User.findOne({
-       attributes: {exclude: ['created', 'username']},
+       attributes: {exclude: ['created']},
        where: {
            username: request.body.username
        }
-   }).then( (user,err) => {
+   }).then( (user) => {
        if(user) {
            //compare hashed password with user input password
            if(bcrypt.compareSync(request.body.password, user.password)){
@@ -59,12 +59,12 @@ user_router.post('/login', (request, response) => {
                response.send(token); 
                console.log(user.dataValues);    
            } else {
-               console.log(err);
+               console.log('a');
+               response.status(400).json({error: 'Wrong  password'});
            }
-        }
-        else 
-        {
-            response.status(400).json({error: 'User does not exist'})
+        } else {
+            console.log('v');
+            response.status(400).json({error: 'User does not exist'});
         }
    }).catch(err => {
        console.log(err);

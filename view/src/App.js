@@ -11,9 +11,9 @@ class App extends Component {
     return (
         <Router>
             <Switch>
-                <Route exact path='/' exact component={Login}/>
+                <Redirect exact from = '/' to = 'login'/>
+                <Route exact path='/login' exact component={Login}/>
                 <Route path='/home' exact component={Home}/>
-             
              </Switch>
             </Router >
 
