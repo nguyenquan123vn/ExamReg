@@ -14,6 +14,7 @@ class App extends Component {
     return (
         <Router>
             <Switch>
+                <Redirect exact from = '/' to = '/login'/>
                 <Route exact path='/login' name = 'Exam Reg' exact component={Login}/>
                 <Route exact path='/homeStudent' exact component={homeStudent}/>
                 <Route exact path='/' name = 'Exam Reg'/>
