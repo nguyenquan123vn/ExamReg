@@ -7,17 +7,16 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+//import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { withRouter } from "react-router-dom";
-import { login } from '../../Controller/Login/Login_func'
+import Authentication from '../../Controller/Login/authentication'
 
-
+ 
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(10),
@@ -37,7 +36,6 @@ const styles = theme => ({
     margin: theme.spacing(3, 0, 2)
   }
 });
-
 class SignIn extends React.Component {
   constructor() {
     super();
@@ -47,13 +45,17 @@ class SignIn extends React.Component {
         error: {}
     }
 
+    this.Auth = new Authentication();
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
   }
 
   componentWillMount(){
-    localStorage.setItem('access_token_examreg', '');
+    //console.log(this.Auth.isLoggedIn());
+    if(this.Auth.isLoggedIn()){
+      this.props.history.replace('/studentHome');
+    }
   }
 
   handleChange(event){
@@ -70,14 +72,30 @@ class SignIn extends React.Component {
       password: this.state.password
     }
 
-    login(user).then(response => {
-      if(response) {
-        this.props.history.push("/home");
-      }
-    })
+    this.Auth.login(user)
+      .then(response => {  
+        //let role = this.Auth.getProfile();
+        //if(role){
+        if(response.isAdmin == 0){
+          this.props.history.replace("/studentHome");
+        } else if(response.isAdmin == 1) {
+          this.props.history.replace("/");
+        }
+        //}
+      })
+      .catch(err => {
+        alert(err);
+      })
   };
 
+  
+  handleSubmit = () => {
+    this.setState({ submitted: true }, () => {
+      this.props.history.push("/home");
+    });
+  };
   render() {
+    const { formData, submitted } = this.state;
     const { classes } = this.props;
     return (
       <ValidatorForm
@@ -100,11 +118,11 @@ class SignIn extends React.Component {
               required
               onChange={this.handleChange}
               value={this.state.username}
-              validators={["required", "minStringLength:8"]}
-              errorMessages={["không được bỏ trống mã số sinh viên", "mã số sinh viên phải  là 8 số"]}
+              validators={["required"]}
+              errorMessages={["không được bỏ trống mã số sinh viên"]}
               fullWidth
               id="username"
-              label="Username"
+              label="Tài khoản hoặc mssv"
               name="username"
             />
             <TextValidator
@@ -117,7 +135,7 @@ class SignIn extends React.Component {
               type="password"
               onChange={this.handleChange}
               value={this.state.password}
-              validators={["required", "minStringLength:6"]}
+              validators={["required", "minStringLength:4"]}
               errorMessages={[
                 "không được để trống mật khẩu",
                 "Mật khẩu ít nhất 6 ký tự"
@@ -133,6 +151,7 @@ class SignIn extends React.Component {
               fullWidth
               variant="contained"
               color="primary"
+              disabled={submitted}
               className={classes.submit}
             >
               Sign In

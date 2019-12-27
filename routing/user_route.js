@@ -2,12 +2,23 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const express_jwt = require('express-jwt');
 
 const User = require('../model/userModel');
 
 const user_router = express.Router();
-user_router.use(cors());
+//user_router.use(cors());
+//init express-jwt
+const jwt_ex = express_jwt({
+    secret: process.env.SECRET_KEY
+})
 
+user_router.use((request, response, next) => {
+    response.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    response.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
+    next();
+ });
+ 
 user_router.post('/register', (request, response) => {
     let today = new Date();
     let userData = {
@@ -42,43 +53,54 @@ user_router.post('/register', (request, response) => {
 
 //login function
 user_router.post('/login', (request, response) => {
-   User.findOne({
-       attributes: {exclude: ['created']},
-       where: {
-           username: request.body.username
-       }
-   }).then( (user) => {
-       if(user) {
-           //compare hashed password with user input password
-           if(bcrypt.compareSync(request.body.password, user.password)){
-               //jwt implementation
-               let token = jwt.sign((user.dataValues), process.env.SECRET_KEY, {
+    User.findOne({
+        attributes: {exclude: ['created']},
+        where: {
+            username: request.body.username
+        }
+    }).then( (user) => {
+        if(user) {
+            //compare hashed password with user input password
+            if(bcrypt.compareSync(request.body.password, user.password)){
+                //jwt implementation
+                let token = jwt.sign({id: user.id, username: user.username, role: user.isAdmin}, process.env.SECRET_KEY, {
                    algorithm : 'HS384',
                    expiresIn : 1440
-               }) 
-               response.send(token); 
-               console.log(user.dataValues);    
-           } else {
-               console.log('a');
-               response.status(400).json({error: 'Wrong  password'});
-           }
+                }) 
+                response.json({
+                    isAdmin: user.isAdmin,
+                    sucess: true,
+                    err: null,
+                    token
+                }); 
+               //console.log(user.id + " " + user.isAdmin);    
+            } else {
+                console.log('Wrong password');
+                response.status(400).json({
+                    isAdmin: null,
+                    sucess: false,
+                    token: null,
+                    err: 'Password is incorrect'
+                });
+            }
         } else {
-            console.log('v');
-            response.status(400).json({error: 'User does not exist'});
+            console.log('Invalid User');
+            response.status(400).json({
+                isAdmin: null,
+                sucess: false,
+                token: null,
+                err: 'Username is invalid'
+            });
         }
-   }).catch(err => {
-       console.log(err);
-       response.status(400).json({error: err});
-   })
+    }).catch(err => {
+        console.log(err);
+        response.status(400).json({error: err});
+    })
 }); 
 
-user_router.get('/logout', (request, response) => {
-    
-})
-
-user_router.get('/user', function (req, res) {
-    
-})
+user_router.get('/', jwt_ex, (request, response) => {
+    response.send('You are authenticated'); //Sending some response when authenticated
+});
 
 /*router.get('*', function(req, res){
     res.send('Sorry, this is an invalid URL.');
