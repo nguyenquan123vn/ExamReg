@@ -8,6 +8,7 @@ export const login = user => {
       })
       .then(response => {
         if(response.status == 200){
+          //console.log(response.data.isAdmin);
           localStorage.setItem('usertoken', response.data)
           return response.data
         }

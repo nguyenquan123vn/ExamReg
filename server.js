@@ -20,9 +20,15 @@ const port = process.env.PORT;
 //var sessionStore = new mysqlStore({},db);
 
 //middleware
+app.use((request, response, next) => {
+   response.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+   response.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
+   next();
+});
+
 app.use(cors());
 app.use(body_parser.json());
-app.use(body_parser.urlencoded({extended: false}));
+app.use(body_parser.urlencoded({extended: true}));
 
 /*app.use(cookie('this is a secret, huehue!!!'));
 app.use(session({
@@ -41,6 +47,15 @@ app.use(session({
 app.use('/user',user_route);
 app.use('/administrator', admin_route);
 app.use('/student', student_route);
+
+app.use(function (err, req, res, next) {
+   if (err.name === 'UnauthorizedError') { // Send the error rather than to show it on the console
+      res.status(401).send(err);
+   }
+   else {
+      next(err);
+   }
+});
 
 // Start the server
 const server = app.listen(port, () => {

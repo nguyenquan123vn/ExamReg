@@ -10,7 +10,7 @@ const routes = [
         component: Login
     },
     {
-        path: '/home',
+        path: '/studentHome',
         exact: true,
         component: Students
     }
