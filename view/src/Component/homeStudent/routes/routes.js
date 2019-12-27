@@ -13,22 +13,16 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import StarIcon from '@material-ui/icons/Star';
-import SendIcon from '@material-ui/icons/Send';
-import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
+import HomeIcon from '@material-ui/icons/Home';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+import PrintIcon from '@material-ui/icons/Print';
+
 
 import Home from '../pages/Home';
-import Cards from '../pages/TestedExam';
+import TestedExam from '../pages/TestedExam';
 
 
 const drawerWidth = 240;
@@ -44,6 +38,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
+    height:"1000px"
   },
   content: {
     flexGrow: 1,
@@ -72,30 +67,30 @@ const Routes = (props) => {
           >
             {/* <div className={classes.toolbar} /> */}
             <List>
-              <ListItem button component={Link} to="/">
+              <ListItem button component={Link} to="/homeStudent">
                 <ListItemIcon>
-                  <InboxIcon />
+                  <HomeIcon />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Danh sách môn thi" />
               </ListItem>
-              <ListItem button component={Link} to="/tabs">
+              <ListItem button component={Link} to="/testedExam">
                 <ListItemIcon>
-                  <InboxIcon />
+                  <DoneAllIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Tabs" />
+                <ListItemText primary="Danh sách môn đã đăng kí" />
               </ListItem>
-              <ListItem button component={Link} to="/cards">
+              <ListItem button component={Link} to="/print">
                 <ListItemIcon>
-                  <StarIcon />
+                  <PrintIcon />
                 </ListItemIcon>
-                <ListItemText primary="Cards" />
+                <ListItemText primary="In môn đã đăng kí" />
               </ListItem>
             </List>
           </Drawer>
           <main className={classes.content}>
             {/* <div className={classes.toolbar} /> */}
-            <Route exact path="/" component={Home}/>
-            <Route path="/cards" component={Cards}/>
+            <Route exact path="/homeStudent" component={Home}/>
+            <Route path="/testedExam" component={TestedExam}/>
            
           </main>
         </div>

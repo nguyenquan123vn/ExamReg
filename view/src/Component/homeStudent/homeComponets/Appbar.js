@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import "../../homeStudent/studentHome.css"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { withRouter } from "react-router-dom";
+import { createBrowserHistory as createHistory } from 'history'
 const styles =makeStyles({
   root: {
     flexGrow: 1,
@@ -25,7 +27,10 @@ const styles =makeStyles({
   }
 })
 
-function ButtonAppBar() {
+function ButtonAppBar({history}) {
+  function logout() {
+    history.push("/homeStudent");
+   }
   const  classes  = styles();
   return (
     <div className={classes.root}>
@@ -34,7 +39,7 @@ function ButtonAppBar() {
           <Typography  variant="h5" color="inherit" className={classes.flex}>
             Hệ thống thi ABCUni
           </Typography>
-          <Button color="inherit">
+          <Button color="inherit" onClick={logout}>
             <ExitToAppIcon/>
             Log Out
           </Button>
