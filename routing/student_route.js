@@ -4,6 +4,8 @@ const cors = require('cors');
 const student_router = express.Router();
 student_router.use(cors());
 
+student_router.get('/roomList', (request, response) => {
 
+})
 
 module.exports = student_router;

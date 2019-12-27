@@ -77,7 +77,7 @@ class SignIn extends React.Component {
         //let role = this.Auth.getProfile();
         //if(role){
         if(response.isAdmin == 0){
-          this.props.history.replace("/studentHome");
+          this.props.history.replace("/homeStudent");
         } else if(response.isAdmin == 1) {
           this.props.history.replace("/");
         }
@@ -89,7 +89,6 @@ class SignIn extends React.Component {
   };
 
   render() {
-    const { formData, submitted } = this.state;
     const { classes } = this.props;
     return (
       <ValidatorForm
@@ -104,7 +103,7 @@ class SignIn extends React.Component {
               <AccountCircleIcon style={{fill:"white"}} />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in to ABCtest
+              Sign in to ABC ExamReg
             </Typography>
             <TextValidator
               variant="outlined"
@@ -113,10 +112,10 @@ class SignIn extends React.Component {
               onChange={this.handleChange}
               value={this.state.username}
               validators={["required"]}
-              errorMessages={["không được bỏ trống mã số sinh viên"]}
+              errorMessages={["không được bỏ trống tên tài khoản"]}
               fullWidth
               id="username"
-              label="Tài khoản hoặc mssv"
+              label="Username"
               name="username"
             />
             <TextValidator
@@ -129,10 +128,9 @@ class SignIn extends React.Component {
               type="password"
               onChange={this.handleChange}
               value={this.state.password}
-              validators={["required", "minStringLength:4"]}
+              validators={["required"]}
               errorMessages={[
                 "không được để trống mật khẩu",
-                "Mật khẩu ít nhất 6 ký tự"
               ]}
               id="password"
             />
@@ -145,7 +143,6 @@ class SignIn extends React.Component {
               fullWidth
               variant="contained"
               color="primary"
-              disabled={submitted}
               className={classes.submit}
             >
               Sign In
