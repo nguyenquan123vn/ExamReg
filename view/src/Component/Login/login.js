@@ -89,7 +89,6 @@ class SignIn extends React.Component {
   };
 
   render() {
-    const { formData, submitted } = this.state;
     const { classes } = this.props;
     return (
       <ValidatorForm
@@ -104,7 +103,7 @@ class SignIn extends React.Component {
               <AccountCircleIcon style={{fill:"white"}} />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in to ABCtest
+              Sign in to ABC ExamReg
             </Typography>
             <TextValidator
               variant="outlined"
@@ -116,7 +115,7 @@ class SignIn extends React.Component {
               errorMessages={["không được bỏ trống mã số sinh viên","Tài khoản ít nhất 5 ký tự "]}
               fullWidth
               id="username"
-              label="Tài khoản hoặc mssv"
+              label="Username"
               name="username"
             />
             <TextValidator
@@ -129,7 +128,7 @@ class SignIn extends React.Component {
               type="password"
               onChange={this.handleChange}
               value={this.state.password}
-              validators={["required", "minStringLength:4"]}
+              validators={["required"]}
               errorMessages={[
                 "không được để trống mật khẩu",
                 "Mật khẩu ít nhất 4 ký tự"
@@ -145,7 +144,6 @@ class SignIn extends React.Component {
               fullWidth
               variant="contained"
               color="primary"
-              disabled={submitted}
               className={classes.submit}
             >
               Sign In

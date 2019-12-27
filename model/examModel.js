@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
-module.exports = db.sequelize.define('exam', {
+const exam_session = require('./examSession');
+
+const exam = db.sequelize.define('exam', {
     //attribute
     exam_id: {
         type: Sequelize.INTEGER,
@@ -28,3 +30,7 @@ module.exports = db.sequelize.define('exam', {
     timestamps: false,
     freezeTableName: true
 })
+exam.hasMany(exam_session);
+exam_session.belongsTo(exam);
+
+module.exports = exam;

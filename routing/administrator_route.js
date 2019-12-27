@@ -105,7 +105,14 @@ admin_router.post('/eligible', upload.single("File"), (request, response) => {
             }).then(eli => {
                 if(!eli)
                 {
-                    eligible.create(studentData)
+                    eligible.create(studentData).then(elig => {
+                        ++count;
+                        console.log("success");
+                        //return;
+                    })
+                    .catch(err =>{
+                        console.log('error:' + err);
+                    })
                 }
             })
         }
@@ -141,6 +148,5 @@ admin_router.post('/addSubject', (request, response) => {
         }
     })
 })
-
 
 module.exports = admin_router;

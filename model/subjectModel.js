@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
-module.exports = db.sequelize.define('subject', {
+const class_subject = require('./classModel');
+
+const subject = db.sequelize.define('subject', {
     //attribute
     subject_id: {
         type: Sequelize.STRING,
@@ -20,3 +22,7 @@ module.exports = db.sequelize.define('subject', {
     timestamps: false,
     freezeTableName: true
 })
+
+subject.hasMany(class_subject);
+
+module.exports = subject;
