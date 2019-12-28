@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
-module.exports = db.sequelize.define('exam_session', {
+const exam_session = db.sequelize.define('exam_session', {
     //attribute
     room_id: {
         type: Sequelize.INTEGER,
@@ -29,4 +29,6 @@ module.exports = db.sequelize.define('exam_session', {
 }, {
     timestamps: false,
     freezeTableName: true
-})
+});
+
+module.exports = exam_session;

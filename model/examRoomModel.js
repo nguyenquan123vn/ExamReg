@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
-module.exports = db.sequelize.define('exam_room', {
+const ex_session = require('./examSession');
+
+const ex_room = db.sequelize.define('exam_room', {
     //attribute
     room_id: {
         type: Sequelize.INTEGER,
@@ -28,4 +30,8 @@ module.exports = db.sequelize.define('exam_room', {
 }, {
     timestamps: false,
     freezeTableName: true
-})
+});
+ex_room.hasOne(ex_session);
+ex_session.belongsTo(ex_room);
+
+module.exports = ex_room;

@@ -13,15 +13,14 @@ import homeStudent from './Component/homeStudent/homeStudent'
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route exact path='/login'>
-            <Login />
-          </Route>
-          <Route exact path='/homeStudent' exact component={homeStudent} />
-         // <Route exact path = '/Test' exact component={Test}/>
-        </Switch>
-      </Router>
+        <Router>
+            <Switch>
+                <Redirect exact from = '/' to = '/login'/>
+                <Route exact path='/login'  exact component={Login}/>
+                <Route exact path='/homeStudent' exact component={homeStudent}/>
+                <Route exact path='/' />
+             </Switch>
+        </Router>
     )
   }
 }

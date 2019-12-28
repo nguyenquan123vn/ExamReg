@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
-module.exports = db.sequelize.define('class_subject', {
+const class_subject = db.sequelize.define('class_subject', {
     //attribute
     class_id: {
         type: Sequelize.STRING,
@@ -24,3 +24,5 @@ module.exports = db.sequelize.define('class_subject', {
     timestamps: false,
     freezeTableName: true
 })
+
+module.exports = class_subject;

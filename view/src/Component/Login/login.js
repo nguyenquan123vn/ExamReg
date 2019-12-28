@@ -16,7 +16,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { withRouter } from "react-router-dom";
 import Authentication from '../../Controller/Login/authentication'
 
-
+ 
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(10),
@@ -36,7 +36,6 @@ const styles = theme => ({
     margin: theme.spacing(3, 0, 2)
   }
 });
-
 class SignIn extends React.Component {
   constructor() {
     super();
@@ -78,7 +77,7 @@ class SignIn extends React.Component {
         //let role = this.Auth.getProfile();
         //if(role){
         if(response.isAdmin == 0){
-          this.props.history.replace("/studentHome");
+          this.props.history.replace("/homeStudent");
         } else if(response.isAdmin == 1) {
           this.props.history.replace("/");
         }
@@ -104,7 +103,7 @@ class SignIn extends React.Component {
               <AccountCircleIcon style={{fill:"white"}} />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in to ABCtest
+              Sign in to ABC ExamReg
             </Typography>
             <TextValidator
               variant="outlined"
@@ -112,8 +111,8 @@ class SignIn extends React.Component {
               required
               onChange={this.handleChange}
               value={this.state.username}
-              validators={["required"]}
-              errorMessages={["không được bỏ trống mã số sinh viên"]}
+              validators={["required","minStringLength:5"]}
+              errorMessages={["không được bỏ trống mã số sinh viên","Tài khoản ít nhất 5 ký tự "]}
               fullWidth
               id="username"
               label="Username"
@@ -129,10 +128,10 @@ class SignIn extends React.Component {
               type="password"
               onChange={this.handleChange}
               value={this.state.password}
-              validators={["required", "minStringLength:4"]}
+              validators={["required"]}
               errorMessages={[
                 "không được để trống mật khẩu",
-                "Mật khẩu ít nhất 6 ký tự"
+                "Mật khẩu ít nhất 4 ký tự"
               ]}
               id="password"
             />
