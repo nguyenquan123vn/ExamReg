@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Typography, Collapse } from "@material-ui/core";
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import { Link,BrowserRouter,Redirect } from "react-router-dom";
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
@@ -40,7 +41,7 @@ const styles = theme => ({
   }
 });
 
-const FlatButtons = props => {
+function FlatButtons(props,history){
   const { classes } = props;
   const [open, setOpen] = React.useState(true);
   const handleClick = () => {
@@ -61,27 +62,12 @@ const FlatButtons = props => {
       </Button>
       </div>
       <List className={classes.root}>
-        <ListItem button>
+  
+        <ListItem button component={Link} to="/homeStudent/dangki" >
           <Typography variant="h5">
-           Đại số
+           Kì 1 năm học 2019-2020
           </Typography> 
         </ListItem>
-        <ListItem button onClick={handleClick} className={classes.nested}>
-          <Typography variant="h6">
-            ca thi 1
-          </Typography>
-          {open?<ExpandLess/>:<ExpandMore/>}
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List>
-            <ListItem button className={classes.nested2}>
-              <Typography variant="h6">
-                phòng thi 5
-              </Typography>
-              <ListItemText primary="Máy đã dùng: 20/30" className={classes.testPos} variant="h6" />
-            </ListItem>
-          </List>
-        </Collapse>
       </List>
     </div>
   );
