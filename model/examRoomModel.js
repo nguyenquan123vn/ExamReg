@@ -31,7 +31,7 @@ const ex_room = db.sequelize.define('exam_room', {
     timestamps: false,
     freezeTableName: true
 });
-ex_room.hasOne(ex_session);
-ex_session.belongsTo(ex_room);
+ex_room.hasOne(ex_session, {foreignKey: 'room_id'});
+ex_session.belongsTo(ex_room, {foreignKey: 'room_id'});
 
 module.exports = ex_room;
