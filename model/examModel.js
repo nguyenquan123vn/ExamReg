@@ -30,7 +30,7 @@ const exam = db.sequelize.define('exam', {
     timestamps: false,
     freezeTableName: true
 })
-exam.hasMany(exam_session);
-exam_session.belongsTo(exam);
+exam.hasMany(exam_session, {foreignKey: 'exam_id'});
+exam_session.belongsTo(exam, {foreignKey: 'exam_id'});
 
 module.exports = exam;

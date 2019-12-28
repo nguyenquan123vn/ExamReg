@@ -39,7 +39,11 @@
     "nodemon": "^1.19.4",
     "popper.js": "^1.16.0",
     "react": "^16.12.0",
+<<<<<<< HEAD
     "react-table": "^7.0.0-rc.15",
+=======
+    "react-to-print": "^2.5.0",
+>>>>>>> aba2391429036653742bbe3213ecbd7528dcbcec
     "read-excel-file": "^4.0.5",
     "request": "^2.88.0",
     "sequelize": "^5.21.3"

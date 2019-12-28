@@ -128,7 +128,7 @@ class SignIn extends React.Component {
               type="password"
               onChange={this.handleChange}
               value={this.state.password}
-              validators={["required"]}
+              validators={["required","minStringLength:5"]}
               errorMessages={[
                 "không được để trống mật khẩu",
                 "Mật khẩu ít nhất 4 ký tự"

@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('./ORM');
 
+const student = require('./studentModel');
+
 const class_subject = db.sequelize.define('class_subject', {
     //attribute
     class_id: {
@@ -24,5 +26,8 @@ const class_subject = db.sequelize.define('class_subject', {
     timestamps: false,
     freezeTableName: true
 })
+
+class_subject.hasMany(student, {foreignKey: 'class_id'});
+student.belongsTo(class_subject, {foreignKey: 'class_id'});
 
 module.exports = class_subject;

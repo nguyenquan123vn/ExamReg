@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,9 +19,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import FilterListIcon from '@material-ui/icons/FilterList';
-
 function createData(name, caThi, fat, carbs, protein) {
   return { name, caThi, fat, carbs, protein };
 }
@@ -68,8 +66,8 @@ function getSorting(order, orderBy) {
 const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Danh sách môn thi' },
   { id: 'caThi', numeric: true, disablePadding: false, label: 'Ca thi' },
-  { id: 'fat', numeric: true, disablePadding: false, label: "Giờ thi" },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Kết quả' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Phòng thi (g)' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Máy trống (g)' },
 ];
 
 function EnhancedTableHead(props) {
@@ -172,9 +170,9 @@ const EnhancedTableToolbar = props => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
+        <Tooltip title="Đăng kí môn">
+          <IconButton aria-label="Đăng kí môn">
+            <AddBoxIcon />
           </IconButton>
         </Tooltip>
       )}

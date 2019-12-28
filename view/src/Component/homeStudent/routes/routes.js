@@ -2,7 +2,9 @@ import React from 'react'
 import {
   Router,
   Route,
-  Link
+  Link,
+  BrowserRouter,
+  Redirect,
 } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory';
 
@@ -16,13 +18,14 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
-import PrintIcon from '@material-ui/icons/Print';
+
 
 
 import Home from '../pages/Home';
 import TestedExam from '../pages/TestedExam';
+import kiThi from '../pages/kiThi'
 
 
 const drawerWidth = 240;
@@ -69,9 +72,9 @@ const Routes = (props) => {
             <List>
               <ListItem button component={Link} to="/homeStudent">
                 <ListItemIcon>
-                  <HomeIcon />
+                  <LibraryBooksIcon />
                 </ListItemIcon>
-                <ListItemText primary="Danh sách môn thi" />
+                <ListItemText primary="Đăng kí môn thi" />
               </ListItem>
               <ListItem button component={Link} to="/testedExam">
                 <ListItemIcon>
@@ -79,19 +82,13 @@ const Routes = (props) => {
                 </ListItemIcon>
                 <ListItemText primary="Danh sách môn đã đăng kí" />
               </ListItem>
-              <ListItem button component={Link} to="/print">
-                <ListItemIcon>
-                  <PrintIcon />
-                </ListItemIcon>
-                <ListItemText primary="In môn đã đăng kí" />
-              </ListItem>
+  
             </List>
           </Drawer>
           <main className={classes.content}>
-            {/* <div className={classes.toolbar} /> */}
             <Route exact path="/homeStudent" component={Home}/>
-            <Route path="/testedExam" component={TestedExam}/>
-           
+            <Route exact path="/testedExam" component={TestedExam}/>
+            <Route  exact path='/homeStudent/dangki'  component={kiThi}/>
           </main>
         </div>
       </Router>
