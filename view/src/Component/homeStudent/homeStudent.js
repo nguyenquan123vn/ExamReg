@@ -36,7 +36,7 @@ function studentHome({ classes, history }) {
             color="inherit"
             aria-label="Menu"
           >
-            <MenuIcon />
+          <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
             Hệ thống thi ABC-ONLINE
